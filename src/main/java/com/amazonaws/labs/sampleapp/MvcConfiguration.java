@@ -13,8 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.regions.RegionUtils;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.autoscaling.AmazonAutoScaling;
 import com.amazonaws.services.autoscaling.AmazonAutoScalingClient;
 import com.amazonaws.services.codedeploy.AmazonCodeDeploy;
@@ -23,12 +23,15 @@ import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.AmazonEC2Client;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.amazonaws.labs.sampleapp"})
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
     private static Region region = RegionUtils.getRegion("us-east-2");
+    
+    private static Logger logger=Logger.getAnonymousLogger();
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -53,6 +56,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public AmazonCodeDeploy codeDeploy() {
         final AmazonCodeDeploy client = new AmazonCodeDeployClient();
+        logger.info("region="+ region);
         client.setRegion(region);
         return client;
     }
@@ -60,6 +64,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public AmazonEC2 ec2() {
         final AmazonEC2 client = new AmazonEC2Client();
+        logger.info("region="+ region);
         client.setRegion(region);
         return client;
     }
@@ -67,6 +72,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public AmazonAutoScaling autoScaling() {
         AmazonAutoScaling client = new AmazonAutoScalingClient();
+        logger.info("region="+ region);
         client.setRegion(region);
         return client;
     }
