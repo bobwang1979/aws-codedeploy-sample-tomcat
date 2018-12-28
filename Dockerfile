@@ -2,7 +2,7 @@ FROM tomcat:latest
 
 # Install dependencies
 
-#RUN apt-get install -y git curl 
+#RUN apt-get install -y git curl  
 
 
 # Install app
