@@ -6,7 +6,7 @@ FROM tomcat:latest
 
 
 # Install app
-ADD SampleMavenTomcatApp.war /usr/local/tomcat/webapps
+ADD /tmp/codedeploy-deployment-staging-area/SampleMavenTomcatApp.war /usr/local/tomcat/webapps
 
 EXPOSE 8080
 
